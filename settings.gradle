@@ -1,1 +1,2 @@
+include ':libs:facebook'
 include ':app'
