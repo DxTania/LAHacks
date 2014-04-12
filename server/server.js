@@ -7,8 +7,8 @@ var express = require ('express'),
 //*******************************************
 //* DATABASE INIT
 //*******************************************
-// var Mongoose = require('mongoose');
-// var db = Mongoose.createConnection('localhost', 'LAHacksYard');
+var Mongoose = require('mongoose');
+var db = Mongoose.createConnection('localhost', 'LAHacksYard');
 
 //*******************************************
 //* SPECIAL EVENT LISTENERS
@@ -26,7 +26,7 @@ require( './globals.js' );
 require( API_CORE );
 
 // Using UTC time
-prcess.env.TZ = 'UTC';
+process.env.TZ = 'UTC';
 
 // Init web server
 var app = express();
@@ -51,8 +51,8 @@ _.filter( apiDir, function( libFile ) {
 
 
 app.listen( CONFIG.port, function( error ) {
-	if ( err ) {
-		console.log( err );
+	if ( error ) {
+		console.log( error );
 	} else {
 		console.log('Listening on Port: ' + CONFIG.port);
 	}
