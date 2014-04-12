@@ -10,3 +10,6 @@ var LikeSchema = new Schema({
   user:  			{ type: Schema.ObjectId, ref : 'User' },
   userName:   { type: String, default : ''}
 });
+
+// Required Like validations
+LikeSchema.path('user').required(true, 'user cannot be blank');

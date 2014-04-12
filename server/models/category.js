@@ -10,3 +10,6 @@ var CategorySchema = new Schema({
   subCategories: 		 [{ type: Schema.ObectId, ref : 'Category' }]
 });
 
+// Required Category validations
+CategorySchema.path('name').required(true, 'name cannot be blank');
+

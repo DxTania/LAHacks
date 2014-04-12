@@ -14,8 +14,10 @@ var FollowSchema = new Schema({
   targType:   { type: String, enum : validTargets },
   // Either targUser or targPost is empty
   // TODO: Learn how to ACTUALLY implement this sort of "polymorphism" in mongoose
-  targUser: 	{ type: Schema.ObjectId, ref : 'User', default: null },
-  targPost: 	{ type: Schema.ObjectId, ref : 'Post', default: null },
+  target: 	  { type: Schema.Types.Mixed, default: null },
   user:  			{ type: Schema.ObjectId, ref : 'User' },
-  userName:   { type: String, default : ''},
+  userName:   { type: String, default : ''}
 });
+
+// Required Follow validations
+FollowSchema.path('user').required(true, 'user cannot be blank');
