@@ -8,7 +8,21 @@ var express = require ('express'),
 //* DATABASE INIT
 //*******************************************
 var Mongoose = require('mongoose');
-var db = Mongoose.createConnection('localhost', 'LAHacksYard');
+var connect = function() {
+    var options = { server: { socketOptions: { keepAlive: 1 }}};
+    mongoose.connect( CONFIG.db, options );
+}
+connect();
+
+// Handle errors
+mongoose.connection.on( 'error', function(err) {
+    console.log(err);
+});
+// Reconnect on disconnect
+mongoose.connection.on( 'disconnected', function(err) {
+    connect();
+});
+
 
 //*******************************************
 //* SPECIAL EVENT LISTENERS
@@ -35,9 +49,10 @@ app.use(express.cookieParser());
 app.use( expressValidator() );
 
 //*******************************************
-//* API LIBRARIES & CONTROLLERS
+//* API LIBRARIES & MODELS
 //*******************************************
 var apiDir = fs.readdirSync( __dirname + '/api' );
+var modelDir = fs.readdirSync( __dirname + '/models' );
 
 // Include all api files
 _.filter( apiDir, function( libFile ) {
@@ -49,6 +64,12 @@ _.filter( apiDir, function( libFile ) {
     }
 });
 
+_.filter( modelDir, function( libFile ) {
+    if ( !fs.statSync( __dirname + '/models/' + libFile ).isDirectory() && libFile.indexOf( '.js' ) !== -1 && libFile != 'models.js' ) {
+        console.log( 'Binding Model Class: ' + libFile );
+    }
+    require( __dirname + '/models/' + libFile ).bind( app );
+});
 
 app.listen( CONFIG.port, function( error ) {
 	if ( error ) {
