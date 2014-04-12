@@ -4,6 +4,26 @@ I'm adding this as a place holder for now.
 Sean Zarringhalam, Tania Depasquale, Tylor Louis
 4/11/14
 
+
+
+-----------------------------------------------------------
+||                      Installation instructions        ||
+-----------------------------------------------------------
 Installation instructions for Mongo, Node, and Express can be found here:
 http://thecodebarbarian.wordpress.com/2013/07/22/introduction-to-the-mean-stack-part-one-setting-up-your-tools/
 You should be able to loosely follow them, they weren't spot on for me.
+
+
+
+
+
+
+-----------------------------------------------------------
+||                      AWS Instance Access	             ||
+-----------------------------------------------------------
+To ssh into our AWS instance:
+Get the pem file I sent you, move it to ~/.ssh or something
+chmod 600 ~/.ssh/LAHacks.pem
+ssh -i ~/.ssh/LAHacks.pem ubuntu@ec2-54-84-80-92.compute-1.amazonaws.com
+
+Note that the actual instance name ubuntu@ec2-54-84-80-92.compute-1.amazonaws.com is subject to change if we need.
