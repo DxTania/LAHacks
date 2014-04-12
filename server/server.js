@@ -5,6 +5,12 @@ var express = require ('express'),
 
 
 //*******************************************
+//* DATABASE INIT
+//*******************************************
+// var Mongoose = require('mongoose');
+// var db = Mongoose.createConnection('localhost', 'LAHacksYard');
+
+//*******************************************
 //* SPECIAL EVENT LISTENERS
 //********************************************
 process.on( 'uncaughtException', function ( error ) {
