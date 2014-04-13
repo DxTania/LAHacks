@@ -14,7 +14,7 @@ var validStatuses = {
 
 // Post Meeting type validator
 var validMeetType = {
-  values: ['public', 'deliver', 'pickup'],
+  values: ['public', 'delivery', 'pickup'],
   message: 'enum validator failed for path `{PATH}` with value `{VALUE}`'
 };
 
