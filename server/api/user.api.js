@@ -1,7 +1,5 @@
-var models = require(MODEL_CORE);
-
-
-
+var mongoose = require('mongoose'),
+    User = mongoose.model('User');
 
 //*******************************************
 //* API CALLS
@@ -19,7 +17,7 @@ exports.bind = function( app ) {
 	});
 
 	// Rate a User
-	app.post('/api/user/signin', function( request, response ) {
+	app.post('/api/user/rate', function( request, response ) {
 
 	});
 
