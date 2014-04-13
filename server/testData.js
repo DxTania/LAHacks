@@ -87,7 +87,7 @@ var testPost1 = {
   meetTypes:         ["public", "delivery"],
   status:             'open',
   sale:               null,
-  // images:            ['http://www.gadgetfactory.net/wp-content/uploads/2013/07/binary.jpg', 'http://static2.businessinsider.com/image/509802cb69bedd6209000009/nicolas-cage-will-be-in-the-expendables-3.jpg' ]
+  images:            ['http://www.gadgetfactory.net/wp-content/uploads/2013/07/binary.jpg', 'http://static2.businessinsider.com/image/509802cb69bedd6209000009/nicolas-cage-will-be-in-the-expendables-3.jpg' ]
 }, testPost2 = {
   title:              "LAHacks Trophy.",
   description:        "It was shiny so I got it, but it's kinda ugly so I'm over it. Pickup only because it's huge.",
@@ -100,7 +100,7 @@ var testPost1 = {
   // transactions
   status:             'open',
   sale:               null,
-  // images:            ['http://static2.businessinsider.com/image/509802cb69bedd6209000009/nicolas-cage-will-be-in-the-expendables-3.jpg', 'http://www.gadgetfactory.net/wp-content/uploads/2013/07/binary.jpg' ],
+  images:            ['http://static2.businessinsider.com/image/509802cb69bedd6209000009/nicolas-cage-will-be-in-the-expendables-3.jpg', 'http://www.gadgetfactory.net/wp-content/uploads/2013/07/binary.jpg' ],
   // Likes
   // follows
 };
