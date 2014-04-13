@@ -2,7 +2,8 @@
 //* POST MODEL
 //*******************************************
 var mongoose = require('mongoose')
-  , Schema = mongoose.Schema;
+  , Schema = mongoose.Schema
+  , imager = require('imager');
 
 
 // Validator for the status enumeration
@@ -24,12 +25,12 @@ var PostSchema = new Schema({
   price:              { type: Number, default: null },
   curPrice:           { type: Number, default: null },
   meetTypes:         [{ type: String, enum : validMeetType }],
-  pickupLoc:          { type: [Number], index: '2dsphere'},             // Only if meetTypes includes pickup
+  pickupLoc:          { type: [Number], index: '2dsphere', default : null },             // Only if meetTypes includes pickup
   user:               { type: Schema.ObjectId, ref : 'User' },
   categories:        [{ type: Schema.ObjectId, ref : 'Category' }],
   bids:              [{ type: Schema.ObjectId, ref : 'transaction' }],
   status:             { type: String, enum: validStatuses, default : 'open' },
-  sale:               { type: Schema.ObjectId, ref : 'transaction' },
+  sale:               { type: Schema.ObjectId, ref : 'transaction', default : null },
   images:            [{ uri:  String, files: []}],
   createdAt:          { type: Date, default: Date.now },
   moddedAt:           { type: Date, default: null },
@@ -42,10 +43,22 @@ var PostSchema = new Schema({
 PostSchema.path('title').required(true, 'title cannot be blank');
 PostSchema.path('user').required(true, 'user cannot be blank');
 PostSchema.path('categories').required(true, 'categories cannot be blank');
-PostSchema.path('images').required(true, 'images cannot be blank');
+// PostSchema.path('images').required(true, 'images cannot be blank');
+
+PostSchema.methods = {
+
+  // Save post and upload images
+  // param: [array] images
+  // private
+
+  // uploadAndSave: function( images, cb ) {
+  //   if (!images || !images.length) return this.save(cb)
 
 
+  // }
+
+}
 
 // Exported MODEL
-var Post = module.exports = mongoose.model('Post', PostSchema, 'posts');
+mongoose.model('Post', PostSchema, 'posts');
 

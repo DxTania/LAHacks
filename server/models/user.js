@@ -30,12 +30,24 @@ UserSchema.path('firstName').required(true, 'firstName cannot be blank');
 
 UserSchema.methods = {
 
-};
+  // Make salt
+  // Return String
+  // public
 
-/**
- * Validations
- */
+  makeSalt: function() {
+        return Math.round( ( new Date().valueOf() * Math.random() ) ) + '';
+  },
+
+  // Get Auth Token
+  // Return String
+  // public
+
+  GetAuthToken: function ( user ) {
+    return crypto.createHash( 'sha256' ).update( UserSchema.methods.MakeSalt() + UserSchema.methods.MakeSalt() ).digest( 'hex' );
+  }
+
+};
 
 
 // Exported MODEL
-var User = module.exports = mongoose.model('User', UserSchema, 'users');
+mongoose.model('User', UserSchema, 'users');

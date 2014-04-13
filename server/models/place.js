@@ -16,7 +16,8 @@ var PlaceSchema = new Schema({
   // TODO: Decide how/if we're saving places
   // TODO: Check syntax of Mongoose GeoJSON fields
   // Note that you should always store longitude first!
-  loc:                { type: [Number], index: '2dsphere'}
+  loc:                { type: [Number], index: '2dsphere'},
+  name:               { type: String, default: '' }
   // TODO: Incorporate google places API data
   // place:
   // placeCat:
@@ -27,4 +28,4 @@ PlaceSchema.path('loc').required(true, 'loc cannot be blank');
 
 
 // Exported MODEL
-var Place = module.exports = mongoose.model('Place', PlaceSchema, 'places');
+mongoose.model('Place', PlaceSchema, 'places');

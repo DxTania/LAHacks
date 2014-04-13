@@ -23,4 +23,4 @@ var FollowSchema = exports.Follow = new Schema({
 FollowSchema.path('user').required(true, 'user cannot be blank');
 
 // Exported MODEL
-var Follow = module.exports = mongoose.model('Follow', FollowSchema, 'follows');
+mongoose.model('Follow', FollowSchema, 'follows');

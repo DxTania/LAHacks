@@ -16,4 +16,4 @@ CategorySchema.path('name').required(true, 'name cannot be blank');
 
 
 // Exported MODEL
-var Category = module.exports = mongoose.model('Category', CategorySchema, 'categories');
+mongoose.model('Category', CategorySchema, 'categories');

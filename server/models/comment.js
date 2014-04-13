@@ -19,8 +19,7 @@ var validTargets = {
 
 var CommentSchema = exports.Comment = new Schema({
   targetType:         { type: String, enum: validTargets },
-  targPost:           { type: Schema.ObjectId, ref : 'Post' },
-  targRating:         { type: Schema.ObjectId, ref : 'Rating', min: 0, max: 5, defualt: null },
+  target:             { type: Schema.Types.Mixed, default: null },                                // Rating or a Post
   user:               { type: Schema.ObjectId, ref : 'User', default: null },
   userName:           { type: String, default : '' },
   avatar:             { trype: String, default : '' },
@@ -35,4 +34,4 @@ CommentSchema.path('comment').required(true, 'comment cannot be blank');
 
 
 // Exported MODEL
-var Comment = module.exports = mongoose.model('Comment', CommentSchema, 'comments');
+mongoose.model('Comment', CommentSchema, 'comments');

@@ -19,6 +19,7 @@ var validMeetType = {
 };
 
 var TransactionSchema = new Schema({
+  bidUser:             { type: Schema.ObjectId, ref : 'User' },
   post:           		 { type: Schema.ObjectId, ref : 'Post' },
   amount:      			   { type: Number, default: 0 },
   status:              { type: String, enum: validStatuses },
@@ -39,4 +40,4 @@ TransactionSchema.path('place').required(true, 'place cannot be blank');
 
 
 // Exported MODEL
-var Transactions = module.exports = mongoose.model('Transactions', TransactionSchema, 'transactions');
+mongoose.model('Transaction', TransactionSchema, 'transactions');

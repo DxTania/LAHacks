@@ -17,4 +17,4 @@ LikeSchema.path('user').required(true, 'user cannot be blank');
 
 
 // Exported MODEL
-var Like = module.exports = mongoose.model('Like', LikeSchema, 'likes');
+mongoose.model('Like', LikeSchema, 'likes');
