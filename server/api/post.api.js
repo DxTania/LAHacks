@@ -29,6 +29,20 @@ exports.bind = function( app ) {
 	app.post('/api/post/create', function( request, response ) {
     console.log(request);
     console.log(request.body);
+    var testData = {
+      title:        request.params('title',
+      description:  request.params('description',
+      obo:          request.params('obo',
+      price:        request.params('price',
+      meetTypes:    request.params('meetTypes',
+      user:         request.params('user',
+      userName:     request.params('userName',
+      categories:   request.params('categories',
+      images:       request.params('images'
+    }
+    console.log("test data");
+    console.log(testData);
+
     if ( validatePostParams( request, response ) ) return;
     var newPost = new Post({
       title:        request.body.title,
@@ -52,7 +66,7 @@ exports.bind = function( app ) {
     });
 	});
 
-// curl --data "title=PostedPost&description=SooooMeta&obo=true&price=50&meetTypes=['public']&user=534a66b105957a57474cfc1f&userName=Tylor Louis&categories=['junk']&images=[{uri:'test',files:[]}]"
+// curl --data "title=PostedPost&description=SooooMeta&obo=true&price=50&meetTypes=['public']&user=534a66b105957a57474cfc1f&userName=Tylor Louis&categories=['junk']&images=['heyo.jpg']"
 
 	// Edit Post
 	app.post('/api/post/edit', function( request, response ) {
