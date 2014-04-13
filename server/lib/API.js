@@ -24,3 +24,8 @@ var CensoredResponse = exports.CensoredResponse = function( params, response, ce
 	var censoredParams = utils.Security.Censor( params, censored, conditionalCensor );
 	JsonResponse( censoredParams, response, 200 );
 };
+
+// Hacky copy data from object
+var PureCloneObj = exports.PureCloneObj = function( obj ) {
+	return JSON.parse(JSON.stringify(obj));
+}

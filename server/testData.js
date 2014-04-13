@@ -177,10 +177,14 @@ aLike.post = trophyPost;
 saveReport(aLike);
 
 appPost.user = tania;
+appPost.userName = tania.firstName + " " + tania.lastName;
 appPost.categories = [CategorySW];
 saveReport(appPost);
+var secondAppPost = appPost;
+saveReport(secondAppPost);
 
 trophyPost.user = tylor;
+trophyPost.userName = tylor.firstName + " " + tylor.lastName;
 trophyPost.categories = [CategoryJ];
 trophyPost.transactions = [aTrans];
 trophyPost.likes = [aLike];

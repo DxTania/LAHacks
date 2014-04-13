@@ -28,7 +28,7 @@ mongoose.connection.on( 'disconnected', function(err) {
 });
 
 // Bootstrap models
-var models_path = __dirname + '/models'
+var models_path = __dirname + '/models';
 fs.readdirSync(models_path).forEach(function (file) {
   if (~file.indexOf('.js')) require(models_path + '/' + file)
 });

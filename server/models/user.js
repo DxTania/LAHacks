@@ -4,7 +4,8 @@
 var mongoose = require('mongoose')
   , Schema = mongoose.Schema
   , crypto = require('crypto')
-  , utils = require('../lib/utils');
+  , utils = require('../lib/utils')
+  , Post = mongoose.model('Post');
 
 var UserSchema = new Schema({
   firstName:           { type: String, default: '' },
@@ -42,7 +43,7 @@ UserSchema.methods = {
   // Return String
   // public
 
-  GetAuthToken: function ( user ) {
+  GetAuthToken: function () {
     return crypto.createHash( 'sha256' ).update( UserSchema.methods.MakeSalt() + UserSchema.methods.MakeSalt() ).digest( 'hex' );
   }
 
