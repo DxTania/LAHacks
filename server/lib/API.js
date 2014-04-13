@@ -12,7 +12,7 @@ var JsonResponse = exports.JsonResponse = function( params, response, code ) {
 	var responseObject = {
 		status: code === 200 ? 'success' : 'error',
 		time: new Date(),
-		message: params
+		data: params
 	};
 	response.json( responseObject, code );
 };

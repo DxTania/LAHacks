@@ -10,7 +10,7 @@ exports.bind = function( app ) {
 
 	// Register
 	app.post('/api/user/signup', function( request, response ) {
-
+		req.assert('firstName', 'First name is required.').notEmpty();
 	});
 
 	// Signin
@@ -33,7 +33,7 @@ exports.bind = function( app ) {
 					return;
 				}
 
-				api.JsonResponse( posts, response, 200 );
+				api.JsonResponse( {posts: posts}, response, 200 );
 			});
 	});
 
@@ -60,7 +60,7 @@ exports.bind = function( app ) {
 
 				retUser = api.PureCloneObj( user );
 				retUser.posts = api.PureCloneObj( posts );
-				api.JsonResponse( retUser, response, 200 );
+				api.JsonResponse( {user: retUser}, response, 200 );
 			});
 		});
   });

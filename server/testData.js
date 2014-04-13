@@ -181,14 +181,14 @@ saveReport(aLike);
 
 appPost.user = tania;
 appPost.userName = tania.firstName + " " + tania.lastName;
-appPost.categories = [CategorySW];
+appPost.categories = [CategorySW.name];
 saveReport(appPost);
 var secondAppPost = appPost;
 saveReport(secondAppPost);
 
 trophyPost.user = tylor;
 trophyPost.userName = tylor.firstName + " " + tylor.lastName;
-trophyPost.categories = [CategoryJ];
+trophyPost.categories = [CategoryJ.name];
 trophyPost.transactions = [aTrans];
 trophyPost.likes = [aLike];
 console.log(trophyPost);
