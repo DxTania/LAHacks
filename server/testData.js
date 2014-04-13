@@ -84,7 +84,7 @@ var testPost1 = {
   obo:                true,
   price:              5499,
   curPrice:           null,
-  meetTypes:         ["public", "deliver"],
+  meetTypes:         ["public", "delivery"],
   status:             'open',
   sale:               null,
   // images:            ['http://www.gadgetfactory.net/wp-content/uploads/2013/07/binary.jpg', 'http://static2.businessinsider.com/image/509802cb69bedd6209000009/nicolas-cage-will-be-in-the-expendables-3.jpg' ]
@@ -135,7 +135,7 @@ var testLike = {
 var aLike = new Like(testLike);
 
 var testPlaceB = {
-  meetTypes:        ['public', 'deliver', 'pickup'],
+  meetTypes:        ['public', 'delivery', 'pickup'],
   rating:           5.0,
   loc:              [-118.4440560, 34.0702640],
   name:             'Boelter Hall'
