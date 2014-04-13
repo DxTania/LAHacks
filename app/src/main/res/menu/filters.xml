@@ -1,11 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.lahacks.app.ForSaleActivity" >
-
-    <item android:id="@+id/action_search"
-          android:icon="@drawable/action_search"
-          android:title="@string/action_search"
-          android:showAsAction="ifRoom" />
+    tools:context="com.lahacks.app.FiltersActivity" >
     
     <item android:id="@+id/action_settings"
         android:title="@string/action_settings"

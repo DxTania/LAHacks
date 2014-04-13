@@ -1,0 +1,16 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.lahacks.app.fragments.CategoriesFragment">
+
+    <com.etsy.android.grid.StaggeredGridView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/categories_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:item_margin="12dp"
+        app:column_count="1" />
+
+</FrameLayout>
