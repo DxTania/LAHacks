@@ -6,7 +6,7 @@ var mongoose = require('mongoose'),
 //*******************************************
 //* Validation data
 //*******************************************
-function validateSignupParams( request ) {
+function validateSignupParams( request, response ) {
 		request.checkBody('firstName', 'firstName is required.').notEmpty();
 		request.checkBody('firstName', 'firstName must be alpha only.').isAlpha();
 		request.checkBody('lastName', 'lastName is required.').notEmpty();
@@ -29,7 +29,7 @@ function validateSignupParams( request ) {
 exports.bind = function( app ) {
 	// Register
 	app.post('/api/user/signup', function( request, response ) {
-	  if( validateSignupParams( request ) ) return;
+	  if( validateSignupParams( request, response ) ) return;
 
 	  var newUser = new User({
 		  firstName:           request.body.firstName,
@@ -92,9 +92,17 @@ exports.bind = function( app ) {
 	});
 
 	// User profile
-  app.post('/api/user/profile', function( request, response ) {
+  app.get('/api/user/profile', function( request, response ) {
+  	if ( !request.query || !request.query.id ) {
+  		var error = "/api/user/profile: invalid user id";
+  		console.log( error );
+  		api.JsonResponse( error, response, 404 );
+  		return;
+  	}
+
+  	var userId = request.query.id;
   	User.findOne({
-  		firstName: 'Tania'
+  		_id: userId
 		}, 'avatar firstName lastName rating'
 		, function( err, user ) {
 			if ( err ) {

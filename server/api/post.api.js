@@ -2,7 +2,7 @@ var mongoose = require('mongoose'),
     api = require(API_CORE),
     Post = mongoose.model('Post');
 
-function validatePostParams( request ) {
+function validatePostParams( request, response ) {
     request.checkBody('title', 'title is required.').notEmpty();
     request.checkBody('description', 'description is required.').notEmpty();
     request.checkBody('obo', 'obo is required.').notEmpty();
@@ -27,7 +27,7 @@ exports.bind = function( app ) {
 
 	// Create Post
 	app.post('/api/post/create', function( request, response ) {
-    if ( validatePostParams( request ) ) return;
+    if ( validatePostParams( request, response ) ) return;
     console.log(request);
     var newPost = new Post({
       title:        request.body.title,
