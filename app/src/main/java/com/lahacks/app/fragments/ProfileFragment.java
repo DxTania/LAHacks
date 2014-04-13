@@ -1,4 +1,4 @@
-package com.lahacks.app;
+package com.lahacks.app.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +14,7 @@ import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
 import com.facebook.model.GraphUser;
 import com.facebook.widget.ProfilePictureView;
+import com.lahacks.app.R;
 
 /**
  * Created by seanzarrin on 4/12/14.
@@ -34,7 +35,7 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View view = inflater.inflate(R.layout.selection,
+        View view = inflater.inflate(R.layout.fragment_profile,
                 container, false);
         // Find the user's profile picture custom view
 
@@ -116,8 +117,6 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
                     }
                 });
         request.executeAsync();
-
-
     }
 
     private void onSessionStateChange(final Session session, SessionState state, Exception exception) {

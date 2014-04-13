@@ -10,7 +10,7 @@ import com.etsy.android.grid.StaggeredGridView;
 import com.lahacks.app.R;
 import com.lahacks.app.adapters.CategoriesAdapter;
 
-public class CategoriesFragment extends Fragment {
+public class CategoriesFragment extends android.support.v4.app.Fragment {
 
     public CategoriesFragment() {}
 

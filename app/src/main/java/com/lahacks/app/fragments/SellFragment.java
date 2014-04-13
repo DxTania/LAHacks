@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class SellFragment extends Fragment {
+public class SellFragment extends android.support.v4.app.Fragment {
     private static final int SELECT_PHOTO = 200;
     private static final int TAKE_PHOTO = 300;
 

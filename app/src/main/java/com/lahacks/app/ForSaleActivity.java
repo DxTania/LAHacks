@@ -1,12 +1,11 @@
 package com.lahacks.app;
 
 import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,11 +15,15 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+import com.facebook.Session;
 import com.lahacks.app.fragments.BrowseFragment;
 import com.lahacks.app.fragments.CategoriesFragment;
+import com.lahacks.app.fragments.ProfileFragment;
 import com.lahacks.app.fragments.SellFragment;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 
-public class ForSaleActivity extends Activity {
+public class ForSaleActivity extends FragmentActivity {
     public static final int WINDOW_SHOP = 0;
     public static final int LIST_ITEM = 1;
     public static final int CATEGORIES = 2;
@@ -127,7 +130,7 @@ public class ForSaleActivity extends Activity {
     private void selectItem(int position) {
 
         String navItem = navigationItems[position];
-        Fragment fragment;
+        Fragment fragment = null;
 
         if (navItem.equals(getString(R.string.windowshop))) {
             fragment = new BrowseFragment();
@@ -138,15 +141,19 @@ public class ForSaleActivity extends Activity {
         } else if (navItem.equals(getString(R.string.categories))) {
             fragment = new CategoriesFragment();
             searchButton = false;
+        } else if (navItem.equals(getString(R.string.profile))) {
+            fragment = new ProfileFragment();
+            searchButton = false;
         } else {
-            Toast.makeText(this, "Profiles not implemented", Toast.LENGTH_LONG).show();
-            return;
+            callFacebookLogout();
         }
 
         invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
 
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+        if (fragment != null) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+        }
 
         // update selected item and title, then close the drawer
         navigation.setItemChecked(position, true);
@@ -171,5 +178,18 @@ public class ForSaleActivity extends Activity {
         super.onConfigurationChanged(newConfig);
         // Pass any configuration change to the drawer toggls
         toggle.onConfigurationChanged(newConfig);
+    }
+
+    public void callFacebookLogout() {
+        Session session = Session.getActiveSession();
+        if (session != null) {
+
+            if (!session.isClosed()) {
+                session.closeAndClearTokenInformation();
+                //clear your preferences if saved
+            }
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
     }
 }

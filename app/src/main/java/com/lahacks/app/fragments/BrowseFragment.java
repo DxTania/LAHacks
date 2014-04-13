@@ -8,7 +8,7 @@ import com.etsy.android.grid.StaggeredGridView;
 import com.lahacks.app.R;
 import com.lahacks.app.adapters.FeedAdapter;
 
-public class BrowseFragment extends Fragment {
+public class BrowseFragment extends android.support.v4.app.Fragment {
 
     public BrowseFragment() {}
 

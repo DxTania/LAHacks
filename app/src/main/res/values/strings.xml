@@ -18,12 +18,14 @@
     <string name="action_search">Search</string>
     <string name="categories">Categories</string>
     <string name="category_header">Choose a category...</string>
+    <string name="logout">Logout</string>
 
     <string-array name="navigation_items">
         <item>@string/windowshop</item>
         <item>@string/list</item>
         <item>@string/categories</item>
         <item>@string/profile</item>
+        <item>@string/logout</item>
     </string-array>
 
     <string name="drawer_open">Open navigation drawer</string>
