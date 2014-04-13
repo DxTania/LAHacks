@@ -1,20 +1,10 @@
 package com.lahacks.app;
 
-import android.app.ActionBar;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
-import android.graphics.Rect;
-import android.graphics.RectF;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.facebook.Request;
@@ -44,7 +34,7 @@ public class SelectionFragment extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View view = inflater.inflate(R.layout.fragment_profile,
+        View view = inflater.inflate(R.layout.selection,
                 container, false);
         // Find the user's profile picture custom view
 
@@ -69,8 +59,6 @@ public class SelectionFragment extends android.support.v4.app.Fragment {
         super.onCreate(savedInstanceState);
         uiHelper = new UiLifecycleHelper(getActivity(), callback);
         uiHelper.onCreate(savedInstanceState);
-
-
     }
 
     @Override
