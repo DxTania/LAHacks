@@ -10,9 +10,10 @@ var UserSchema = new Schema({
   firstName:           { type: String, default: '' },
   lastName:            { type: String, default: '' },
   email:               { type: String, default: '' },
-  fbAuth:              { type: String, default: '' },
   rating:              { type: Number, min: 0, max: 5, default: 5 },
   fbAuth:              { type: String, default: '' },
+  fbUserId:            { type: String, default: '' },
+  authToken:           { type: String, default: '' },
   avatar:              { type: String, default: '' },
   interests:          [{ type: Schema.ObjectId, ref : 'Category' }],    // List of category names
   sellTypes:          [{ type: String, default: '' }],                                // List of most often sold categories

@@ -27,7 +27,7 @@ var PostSchema = new Schema({
   pickupLoc:          { type: [Number], index: '2dsphere'},             // Only if meetTypes includes pickup
   user:               { type: Schema.ObjectId, ref : 'User' },
   categories:        [{ type: Schema.ObjectId, ref : 'Category' }],
-  offers:            [{ type: Schema.ObjectId, ref : 'transaction' }],
+  bids:              [{ type: Schema.ObjectId, ref : 'transaction' }],
   status:             { type: String, enum: validStatuses, default : 'open' },
   sale:               { type: Schema.ObjectId, ref : 'transaction' },
   images:            [{ uri:  String, files: []}],
