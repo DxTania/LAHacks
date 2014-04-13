@@ -10,7 +10,7 @@ var validTargets = {
   message: 'enum validator failed for path `{PATH}` with value `{VALUE}`'
 }
 
-var FollowSchema = new Schema({
+var FollowSchema = exports.Follow = new Schema({
   targType:   { type: String, enum : validTargets },
   // Either targUser or targPost is empty
   // TODO: Learn how to ACTUALLY implement this sort of "polymorphism" in mongoose
@@ -21,3 +21,6 @@ var FollowSchema = new Schema({
 
 // Required Follow validations
 FollowSchema.path('user').required(true, 'user cannot be blank');
+
+// Exported MODEL
+var Follow = module.exports = mongoose.model('Follow', FollowSchema, 'follows');

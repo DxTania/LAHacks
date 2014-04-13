@@ -26,16 +26,16 @@ var PostSchema = new Schema({
   meetTypes:         [{ type: String, enum : validMeetType }],
   pickupLoc:          { type: [Number], index: '2dsphere'},             // Only if meetTypes includes pickup
   user:               { type: Schema.ObjectId, ref : 'User' },
-  categories:        [{ type: Schema.ObectId, ref : 'Category' }],
-  offers:            [{ type: Schema,ObjectId, ref : 'transaction' }],
+  categories:        [{ type: Schema.ObjectId, ref : 'Category' }],
+  offers:            [{ type: Schema.ObjectId, ref : 'transaction' }],
   status:             { type: String, enum: validStatuses, default : 'open' },
-  sale:               { type: Schema,ObjectId, ref : 'transaction' },
+  sale:               { type: Schema.ObjectId, ref : 'transaction' },
   images:            [{ uri:  String, files: []}],
   createdAt:          { type: Date, default: Date.now },
   moddedAt:           { type: Date, default: null },
   soldAt:             { type: Date, default: null },
-  likes:             [{ type: Schema,ObjectId, ref : 'like' }],
-  follows:           [{ type: Schema,ObjectId, ref : 'follow' }]
+  likes:             [{ type: Schema.ObjectId, ref : 'like' }],
+  follows:           [{ type: Schema.ObjectId, ref : 'follow' }]
 });
 
 // Required Post validations
@@ -43,4 +43,9 @@ PostSchema.path('title').required(true, 'title cannot be blank');
 PostSchema.path('user').required(true, 'user cannot be blank');
 PostSchema.path('categories').required(true, 'categories cannot be blank');
 PostSchema.path('images').required(true, 'images cannot be blank');
+
+
+
+// Exported MODEL
+var Post = module.exports = mongoose.model('Post', PostSchema, 'posts');
 

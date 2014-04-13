@@ -14,10 +14,10 @@ var UserSchema = new Schema({
   rating:              { type: Number, min: 0, max: 5, default: 5 },
   fbAuth:              { type: String, default: '' },
   avatar:              { type: String, default: '' },
-  interests:          [{ type: Schema.ObjectId, ref : 'Category', default: '' }],    // List of category names
+  interests:          [{ type: Schema.ObjectId, ref : 'Category' }],    // List of category names
   sellTypes:          [{ type: String, default: '' }],                                // List of most often sold categories
-  wishlist:           [{ type: Schema.ObectId, ref : 'Post' }],
-  following:          [{ type: Schema.ObectId, ref : 'User' }]
+  wishlist:           [{ type: Schema.ObjectId, ref : 'Post' }],
+  following:          [{ type: Schema.ObjectId, ref : 'User' }]
 });
 
 // Required User validations
@@ -34,3 +34,7 @@ UserSchema.methods = {
 /**
  * Validations
  */
+
+
+// Exported MODEL
+var User = module.exports = mongoose.model('User', UserSchema, 'users');

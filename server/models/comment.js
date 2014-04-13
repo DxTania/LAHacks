@@ -17,7 +17,7 @@ var validTargets = {
   message: 'enum validator failed for path `{PATH}` with value `{VALUE}`'
 }
 
-var CommentSchema = new Schema({
+var CommentSchema = exports.Comment = new Schema({
   targetType:         { type: String, enum: validTargets },
   targPost:           { type: Schema.ObjectId, ref : 'Post' },
   targRating:         { type: Schema.ObjectId, ref : 'Rating', min: 0, max: 5, defualt: null },
@@ -31,4 +31,8 @@ var CommentSchema = new Schema({
 
 // Required Comment validations
 CommentSchema.path('user').required(true, 'user cannot be blank');
-CommentSchema.path('comment').required(ture, 'comment cannot be blank');
+CommentSchema.path('comment').required(true, 'comment cannot be blank');
+
+
+// Exported MODEL
+var Comment = module.exports = mongoose.model('Comment', CommentSchema, 'comments');

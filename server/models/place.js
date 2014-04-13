@@ -24,3 +24,7 @@ var PlaceSchema = new Schema({
 
 // Required Place validations
 PlaceSchema.path('loc').required(true, 'loc cannot be blank');
+
+
+// Exported MODEL
+var Place = module.exports = mongoose.model('Place', PlaceSchema, 'places');
