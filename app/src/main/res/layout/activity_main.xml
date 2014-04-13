@@ -10,11 +10,11 @@
               tools:context="com.lahacks.app.MainActivity"
               android:background="#ffffff">
 
-    <fragment android:name="com.lahacks.app.SelectionFragment"
+    <fragment android:name="com.lahacks.app.ProfileFragment"
               android:id="@+id/selectionFragment"
               android:layout_width="match_parent"
               android:layout_height="match_parent" />
-    <fragment android:name="com.lahacks.app.SplashFragment"
+    <fragment android:name="com.lahacks.app.FacebookFragment"
               android:id="@+id/splashFragment"
               android:layout_width="match_parent"
               android:layout_height="match_parent" />
