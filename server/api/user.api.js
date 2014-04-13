@@ -19,6 +19,7 @@ function validateSignupParams( request ) {
 			console.log( errors );
 			api.JsonResponse( errors, response, 400 );
 		}
+		return errors || null;
 }
 
 
@@ -28,7 +29,7 @@ function validateSignupParams( request ) {
 exports.bind = function( app ) {
 	// Register
 	app.post('/api/user/signup', function( request, response ) {
-	  validateSignupParams( request );
+	  if( validateSignupParams( request ) ) return;
 
 	  var newUser = new User({
 		  firstName:           request.body.firstName,

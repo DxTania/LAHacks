@@ -2,7 +2,23 @@ var mongoose = require('mongoose'),
     api = require(API_CORE),
     Post = mongoose.model('Post');
 
-
+function validatePostParams( request ) {
+    request.checkBody('title', 'title is required.').notEmpty();
+    request.checkBody('description', 'description is required.').notEmpty();
+    request.checkBody('obo', 'obo is required.').notEmpty();
+    request.checkBody('price', 'price is required.').notEmpty();
+    request.checkBody('meetTypes', 'meetTypes is required.').notEmpty();
+    request.checkBody('user', 'user is required.').notEmpty();
+    request.checkBody('userName', 'userName is required.').notEmpty();
+    request.checkBody('categories', 'categories is required.').notEmpty();
+    request.checkBody('images', 'images is required.').notEmpty();
+    var errors = request.validationErrors();
+    if ( errors ) {
+      console.log( errors );
+      api.JsonResponse( errors, response, 400 );
+    }
+    return errors || null;
+}
 
 //*******************************************
 //* API CALLS
@@ -11,7 +27,28 @@ exports.bind = function( app ) {
 
 	// Create Post
 	app.post('/api/post/create', function( request, response ) {
+    if ( validatePostParams( request ) ) return;
 
+    var newPost = new Post({
+      title:        request.body.title,
+      description:  request.body.description,
+      obo:          request.body.obo,
+      price:        request.body.price,
+      meetTypes:    request.body.meetTypes,
+      user:         request.body.user,
+      userName:     request.body.userName,
+      categories:   request.body.categories,
+      images:       request.body.images
+    });
+
+    newPost.save( function( error, post ) {
+        if ( error ) {
+          console.log( error );
+          JsonResponse( error, response, 500 );
+          return;
+        }
+        JsonResponse( post, response, 200 );
+    });
 	});
 
 	// Edit Post
