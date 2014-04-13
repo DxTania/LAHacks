@@ -1,2 +1,3 @@
 include ':libs:facebook'
+include ':libs:stripe'
 include ':app'

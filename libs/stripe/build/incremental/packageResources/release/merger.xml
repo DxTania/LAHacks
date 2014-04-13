@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger>
+
+    <dataSet config="main" >
+        <source path="/Users/seanzarrin/AndroidStudioProjects/LAHacks/libs/stripe/res" />
+        <source path="/Users/seanzarrin/AndroidStudioProjects/LAHacks/libs/stripe/build/res/rs/release" />
+        <source path="/Users/seanzarrin/AndroidStudioProjects/LAHacks/libs/stripe/build/res/generated/release" />
+    </dataSet>
+    <dataSet config="release" >
+        <source path="/Users/seanzarrin/AndroidStudioProjects/LAHacks/libs/stripe/src/release/res" />
+    </dataSet>
+
+</merger>
