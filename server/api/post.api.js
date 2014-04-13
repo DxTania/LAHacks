@@ -1,4 +1,5 @@
 var mongoose = require('mongoose'),
+    api = require(API_CORE),
     Post = mongoose.model('Post');
 
 

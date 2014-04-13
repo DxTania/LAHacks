@@ -1,4 +1,5 @@
 var mongoose = require('mongoose'),
+    api = require(API_CORE),
     Comment = mongoose.model('Comment');
 
 

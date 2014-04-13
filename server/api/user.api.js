@@ -1,5 +1,7 @@
 var mongoose = require('mongoose'),
-    User = mongoose.model('User');
+		api = require(API_CORE),
+    User = mongoose.model('User'),
+    Post = mongoose.model('Post');
 
 //*******************************************
 //* API CALLS
@@ -23,7 +25,16 @@ exports.bind = function( app ) {
 
 	// Generate user's feed
 	app.post('/api/user/feed', function( request, response ) {
+		Post.find({},
+			function( err, posts ) {
+				if ( err ) {
+					console.log( err );
+					api.JsonResponse( error, response, 500 );
+					return;
+				}
 
+				api.JsonResponse( posts, response );
+			});
 	});
 
   // Follow a user
