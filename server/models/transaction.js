@@ -19,22 +19,24 @@ var validMeetType = {
 };
 
 var TransactionSchema = new Schema({
-  post:           		 { type: Schema.ObectId, ref : 'Post' },
+  post:           		 { type: Schema.ObjectId, ref : 'Post' },
   amount:      			   { type: Number, default: 0 },
   status:              { type: String, enum: validStatuses },
-  locationRating:      { type: Number, default: null },           // Later used to determine safety of locations, maybe remove this field, move to Place
-  overallRating:       { type: Number, default: null },           // Same value that should be used to calculate the user rating
-  placeRating:         { type: Number, default: null },           // This transaction's specific location rating
-  place:               { type: Schema.ObectId, ref: "Place" },
+  place:               { type: Schema.ObjectId, ref: "Place" },
+  placeRating:         { type: Number, min: 0, max: 5, default: null },           // This transaction's specific location rating
+  overallRating:       { type: Number, min: 0, max: 5, default: null },           // Same value that should be used to calculate the user rating
   meetType:            { type: String, enum: validMeetType },
   createdAt:           { type: Date, default: Date.now},
   closedAt:            { type: Date, default: null}
 });
 
-TransactionSchema.methods = {
+// Required Post validations
+TransactionSchema.path('post').required(true, 'post cannot be blank');
+TransactionSchema.path('amount').required(true, 'amount cannot be blank');
+TransactionSchema.path('place').required(true, 'place cannot be blank');
 
-};
 
-/**
- * Validations
- */
+
+
+// Exported MODEL
+var Transactions = module.exports = mongoose.model('Transactions', TransactionSchema, 'transactions');

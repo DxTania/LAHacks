@@ -11,13 +11,20 @@ var validMeetType = {
 };
 
 var PlaceSchema = new Schema({
-  meetTypes:           [{ type: String, enum: validMeetType }],     // Guess location type home/public by most often occurred
-  rating:              { type: Number, default: 0 },
+  meetTypes:          [{ type: String, enum: validMeetType }],     // Guess location type home/public by most often occurred
+  rating:              { type: Number, min: 0, max: 5, default: 5 },
   // TODO: Decide how/if we're saving places
   // TODO: Check syntax of Mongoose GeoJSON fields
   // Note that you should always store longitude first!
-  loc:                 [ ],
+  loc:                { type: [Number], index: '2dsphere'}
   // TODO: Incorporate google places API data
   // place:
   // placeCat:
 });
+
+// Required Place validations
+PlaceSchema.path('loc').required(true, 'loc cannot be blank');
+
+
+// Exported MODEL
+var Place = module.exports = mongoose.model('Place', PlaceSchema, 'places');

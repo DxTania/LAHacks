@@ -1,8 +1,15 @@
 var express = require ('express'),
+    mongoose = require('mongoose'),
 	fs      = require('fs'),
     expressValidator = require('express-validator'),
 	_       = require( 'underscore' );
 
+//*******************************************
+//* GLOBAL VARS (accessible from anywhere)
+//********************************************
+require( './globals.js' );
+require( API_CORE );
+var models = require( MODEL_CORE );
 
 //*******************************************
 //* DATABASE INIT
@@ -13,7 +20,6 @@ var connect = function() {
     mongoose.connect( CONFIG.db, options );
 }
 connect();
-
 // Handle errors
 mongoose.connection.on( 'error', function(err) {
     console.log(err);
@@ -33,12 +39,6 @@ process.on( 'uncaughtException', function ( error ) {
 });
 
 
-//*******************************************
-//* GLOBAL VARS (accessible from anywhere)
-//********************************************
-require( './globals.js' );
-require( API_CORE );
-
 // Using UTC time
 process.env.TZ = 'UTC';
 
@@ -57,19 +57,17 @@ var modelDir = fs.readdirSync( __dirname + '/models' );
 // Include all api files
 _.filter( apiDir, function( libFile ) {
     if ( !fs.statSync( __dirname + '/api/' + libFile ).isDirectory() && libFile.indexOf( '.js' ) !== -1 && libFile != 'API.js' ) {
-    	if( CONFIG.environment!='live' ) {
-            console.log( 'Binding API Class: ' + libFile );    
-        }
+        console.log( 'Binding API Class: ' + libFile );
     	require( __dirname + '/api/' + libFile ).bind( app );
     }
 });
 
-_.filter( modelDir, function( libFile ) {
-    if ( !fs.statSync( __dirname + '/models/' + libFile ).isDirectory() && libFile.indexOf( '.js' ) !== -1 && libFile != 'models.js' ) {
-        console.log( 'Binding Model Class: ' + libFile );
-    }
-    require( __dirname + '/models/' + libFile ).bind( app );
-});
+// _.filter( modelDir, function( libFile ) {
+//     if ( !fs.statSync( __dirname + '/models/' + libFile ).isDirectory() && libFile.indexOf( '.js' ) !== -1 && libFile != 'models.js' ) {
+//         console.log( 'Binding Model Class: ' + libFile );
+//         require( __dirname + '/models/' + libFile );
+//     }
+// });
 
 app.listen( CONFIG.port, function( error ) {
 	if ( error ) {
