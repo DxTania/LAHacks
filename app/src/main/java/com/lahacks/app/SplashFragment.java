@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 /**
  * Created by seanzarrin on 4/12/14.
  */
-public class FacebookFragment extends android.support.v4.app.Fragment{
+public class SplashFragment extends android.support.v4.app.Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {

@@ -18,7 +18,7 @@ import com.facebook.widget.ProfilePictureView;
 /**
  * Created by seanzarrin on 4/12/14.
  */
-public class ProfileFragment extends android.support.v4.app.Fragment {
+public class SelectionFragment extends android.support.v4.app.Fragment {
     private ProfilePictureView profilePictureView;
     private TextView userNameView;
     private UiLifecycleHelper uiHelper;
