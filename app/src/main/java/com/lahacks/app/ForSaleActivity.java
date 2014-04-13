@@ -13,13 +13,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 import com.facebook.Session;
 import com.lahacks.app.fragments.BrowseFragment;
+import com.lahacks.app.fragments.CardFragment;
 import com.lahacks.app.fragments.CategoriesFragment;
 import com.lahacks.app.fragments.ProfileFragment;
 import com.lahacks.app.fragments.SellFragment;
+import com.stripe.android.Stripe;
+import com.stripe.android.TokenCallback;
+import com.stripe.android.model.Card;
+import com.stripe.android.model.Token;
+
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
@@ -28,6 +35,7 @@ public class ForSaleActivity extends FragmentActivity {
     public static final int LIST_ITEM = 1;
     public static final int CATEGORIES = 2;
     public static final int PROFILE = 3;
+    public static final String PUBLISHABLE_KEY = "pk_test_6pRNASCoBOKtIshFeQd4XMUh";
 
     private DrawerLayout sidebar;
     private ListView navigation;
@@ -144,6 +152,9 @@ public class ForSaleActivity extends FragmentActivity {
         } else if (navItem.equals(getString(R.string.profile))) {
             fragment = new ProfileFragment();
             searchButton = false;
+        } else if (navItem.equals(getString(R.string.add_card))){
+            fragment = new CardFragment();
+            searchButton = false;
         } else {
             callFacebookLogout();
         }
@@ -191,5 +202,38 @@ public class ForSaleActivity extends FragmentActivity {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }
+    }
+
+    public void saveCreditCard(View view){
+        String cardNumber = ((EditText) findViewById(R.id.cardNumber)).getText().toString();
+        int expMonth = Integer.parseInt(((EditText) findViewById(R.id.month)).getText().toString());
+        int expYear = Integer.parseInt(((EditText) findViewById(R.id.year)).getText().toString());
+        String cvc = ((EditText) findViewById(R.id.cvc)).getText().toString();
+        Card card = new Card(cardNumber, expMonth, expYear, cvc);
+        card.validateNumber();
+        card.validateCVC();
+
+        if(!card.validateCard()){
+            Toast.makeText(this, "This is not a valid card", Toast.LENGTH_LONG).show();
+            return;
+        }
+        Stripe stripe;
+        try {
+            stripe = new Stripe(PUBLISHABLE_KEY);
+        } catch (com.stripe.exception.AuthenticationException e) {
+            e.printStackTrace();
+            return;
+        }
+        stripe.createToken(
+                card,
+                new TokenCallback(){
+                    public void onSuccess(Token token) {
+                        // Send token to Tylor's server
+                    }
+                    public void onError(Exception error){
+                        // Take care of error
+                    }
+                }
+        );
     }
 }
