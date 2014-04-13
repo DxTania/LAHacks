@@ -35,6 +35,7 @@ var testUser1 = {
 	lastName: "Depasquale",
 	email: "rawrtan@gmail.com",
 	rating: 5,
+  numRatings: 100,
 	fbAuth: 'randomstuff',
 	avatar: 'https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash3/t1.0-1/p320x320/1925248_473960559382783_1046490155_n.jpg'
 },  testUser2 = {
@@ -42,6 +43,7 @@ var testUser1 = {
   lastName: "Louis",
   email: "tylorlouis@ucla.edu",
   rating: 5,
+  numRatings: 3,
   fbAuth: 'randomstuff',
   avatar: 'sleepy.png'
 }, testUser3 = {
@@ -49,6 +51,7 @@ var testUser1 = {
   lastName: "Zarringhalam",
   email: "sean@sean.com",
   rating: 5,
+  numRatings: 80,
   fbAuth: 'randomstuff',
   avatar: 'sleepy.png'
 };

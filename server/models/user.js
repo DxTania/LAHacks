@@ -12,8 +12,11 @@ var UserSchema = new Schema({
   lastName:            { type: String, default: '' },
   email:               { type: String, default: '' },
   rating:              { type: Number, min: 0, max: 5, default: 5 },
+  numRatings:          { type: Number, default: 0 },
   fbAuth:              { type: String, default: '' },
   fbUserId:            { type: String, default: '' },
+  stripeAuth:          { type: String, default: '' },
+  stripeUserId:        { type: String, default: '' },
   authToken:           { type: String, default: '' },
   avatar:              { type: String, default: '' },
   interests:          [{ type: Schema.ObjectId, ref : 'Category' }],    // List of category names

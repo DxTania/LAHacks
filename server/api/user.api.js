@@ -33,7 +33,7 @@ exports.bind = function( app ) {
 					return;
 				}
 
-				api.JsonResponse( posts, response );
+				api.JsonResponse( posts, response, 200 );
 			});
 	});
 
@@ -60,7 +60,7 @@ exports.bind = function( app ) {
 
 				retUser = api.PureCloneObj( user );
 				retUser.posts = api.PureCloneObj( posts );
-				api.JsonResponse( retUser, response );
+				api.JsonResponse( retUser, response, 200 );
 			});
 		});
   });
