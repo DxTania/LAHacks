@@ -23,11 +23,12 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 public class HttpReceiver extends AsyncTask<Void, Void, String> {
-    String feedUrl = "http://ec2-54-84-189-134.compute-1.amazonaws.com/api/user/feed";
+    String feedUrl;
     HttpCallback callback;
 
-    public HttpReceiver(HttpCallback callback) {
+    public HttpReceiver(HttpCallback callback, String feedUrl) {
         this.callback = callback;
+        this.feedUrl = feedUrl;
     }
 
     @Override

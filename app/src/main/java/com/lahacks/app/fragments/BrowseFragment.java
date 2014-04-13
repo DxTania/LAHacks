@@ -40,7 +40,7 @@ public class BrowseFragment extends android.support.v4.app.Fragment implements H
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Start async. download of feed items
-        new HttpReceiver(this).execute();
+        new HttpReceiver(this, "http://ec2-54-84-189-134.compute-1.amazonaws.com/api/user/feed").execute();
         return rootView = inflater.inflate(R.layout.fragment_browse, container, false);
     }
 
