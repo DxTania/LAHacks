@@ -36,7 +36,7 @@ var testUser1 = {
 	email: "rawrtan@gmail.com",
 	rating: 5,
 	fbAuth: 'randomstuff',
-	avatar: 'sexy.png'
+	avatar: 'https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash3/t1.0-1/p320x320/1925248_473960559382783_1046490155_n.jpg'
 },  testUser2 = {
   firstName: "Tylor",
   lastName: "Louis",
