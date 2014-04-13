@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="gson-2.2.2">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/app/build/exploded-aar/LAHacks.libs/stripe/unspecified/libs/gson-2.2.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/stripe/libs/gson-2.2.2.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

@@ -21,22 +21,31 @@ import com.lahacks.app.ListingActivity;
 import com.google.gson.Gson;
 import android.content.res.Configuration;
 
+import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * Created by rawrtan on 4/12/14.
  */
 public class FeedAdapter implements ListAdapter {
 
-    Context context;
-    Bitmap example;
+    private Context context;
+    private Bitmap example;
+    private List<Item> contents;
 
     public FeedAdapter(Context c) {
         context = c;
-        example = BitmapFactory.decodeResource(context.getResources(), R.drawable.example);
+        contents = new ArrayList<Item>();
+        Bitmap ex = BitmapFactory.decodeResource(context.getResources(), R.drawable.example);
+        double ratio = ex.getWidth()/ex.getHeight();
+        example = Bitmap.createScaledBitmap(ex, 200, (int) (200/ratio), false);
+        ex.recycle();
     }
 
-    public void setContents() {
-
+    public void setContents(List<Item> items) {
+        contents = items;
     }
 
     @Override
@@ -61,7 +70,7 @@ public class FeedAdapter implements ListAdapter {
 
     @Override
     public int getCount() {
-        return 10;
+        return contents.size();
     }
 
     @Override
@@ -82,6 +91,8 @@ public class FeedAdapter implements ListAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // TODO: Retrieve a bunch of items from server, use those values and content
+        final Item item = contents.get(position);
+
         // Item Layout
         LinearLayout itemLayout = new LinearLayout(context);
         itemLayout.setBackgroundColor(Color.WHITE);
@@ -106,14 +117,17 @@ public class FeedAdapter implements ListAdapter {
                 LinearLayout.LayoutParams.MATCH_PARENT, 0.7f);
         textLayout.setLayoutParams(params);
 
+        // Title
         TextView textTitle = new TextView(context);
-        textTitle.setText("Necklace");
+        textTitle.setText(item.getTitle());
         textTitle.setPadding(10, 10, 0, 10);
         textTitle.setBackgroundColor(Color.WHITE);
         textTitle.setLayoutParams(textParams);
 
+        // Price
         TextView textPrice = new TextView(context);
-        textPrice.setText("$5");
+        NumberFormat nf = NumberFormat.getCurrencyInstance();
+        textPrice.setText(nf.format(item.getPrice()));
         textPrice.setPadding(0, 10, 10, 10);
         textPrice.setLayoutParams(textParams2);
         textPrice.setGravity(Gravity.RIGHT);
@@ -130,9 +144,6 @@ public class FeedAdapter implements ListAdapter {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, ListingActivity.class);
-                // TODO: Put item information in intent
-                boolean[] methods = {true, true, false};
-                Item item = new Item("Necklace", "Blah blah jewelry", "jewelry", methods, 1.1, false, null);
                 String sItem = (new Gson()).toJson(item);
                 intent.putExtra("item", sItem);
                 context.startActivity(intent);

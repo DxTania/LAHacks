@@ -1,6 +1,7 @@
 package com.lahacks.app;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,6 +12,7 @@ import com.lahacks.app.classes.Item;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -40,15 +42,15 @@ public class ListingActivity extends Activity {
 
         // Preferred method spinner
         Spinner methodSpinner = (Spinner) findViewById(R.id.preferredMethod);
-        boolean[] methods = item.getMethods();
+        List<String> meetTypes = item.getMeetTypes();
         List<String> list = new ArrayList<String>();
-        if (methods[Item.DELIVERY]) {
+        if (meetTypes.contains("delivery")) {
             list.add("Delivery");
         }
-        if (methods[Item.MEETUP]) {
-            list.add("Meetup");
+        if (meetTypes.contains("public")) {
+            list.add("Public");
         }
-        if (methods[Item.PICKUP]) {
+        if (meetTypes.contains("pickup")) {
             list.add("Pickup");
         }
         ArrayAdapter<String> transAdapter = new ArrayAdapter<String>(this,
@@ -56,7 +58,7 @@ public class ListingActivity extends Activity {
         transAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         methodSpinner.setAdapter(transAdapter);
 
-        // Button text
+        // Button bid / buy text
         Button action = (Button) findViewById(R.id.list);
         if (item.isObo()) {
             action.setText("Bid");
@@ -67,6 +69,14 @@ public class ListingActivity extends Activity {
             @Override
             public void onClick(View v) {
 
+            }
+        });
+
+        Button viewSellerProfile = (Button) findViewById(R.id.viewSellerProfile);
+        viewSellerProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent intent = new Intent(this, )
             }
         });
 
