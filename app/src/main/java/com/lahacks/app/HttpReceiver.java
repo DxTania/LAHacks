@@ -23,18 +23,17 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 public class HttpReceiver extends AsyncTask<Void, Void, String> {
-    String feedUrl;
+    HttpPost post;
     HttpCallback callback;
 
-    public HttpReceiver(HttpCallback callback, String feedUrl) {
+    public HttpReceiver(HttpCallback callback, HttpPost post) {
         this.callback = callback;
-        this.feedUrl = feedUrl;
+        this.post = post;
     }
 
     @Override
     public String doInBackground(Void... params) {
         HttpClient client = new DefaultHttpClient();
-        HttpPost post = new HttpPost(feedUrl);
         HttpResponse response;
         String json = "";
 

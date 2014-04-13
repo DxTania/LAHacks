@@ -12,6 +12,7 @@ import com.lahacks.app.HttpReceiver;
 import com.lahacks.app.R;
 import com.lahacks.app.adapters.FeedAdapter;
 import com.lahacks.app.classes.Item;
+import org.apache.http.client.methods.HttpPost;
 
 import java.lang.reflect.Type;
 import java.util.List;
@@ -40,7 +41,8 @@ public class BrowseFragment extends android.support.v4.app.Fragment implements H
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Start async. download of feed items
-        new HttpReceiver(this, "http://ec2-54-84-189-134.compute-1.amazonaws.com/api/user/feed").execute();
+        HttpPost post = new HttpPost("http://ec2-54-84-189-134.compute-1.amazonaws.com/api/user/feed");
+        new HttpReceiver(this, post).execute();
         return rootView = inflater.inflate(R.layout.fragment_browse, container, false);
     }
 
