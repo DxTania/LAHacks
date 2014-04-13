@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.content.Intent;
 
+import android.widget.Toast;
 import com.facebook.*;
 import com.facebook.model.*;
 import com.facebook.LoggingBehavior;
@@ -68,7 +69,7 @@ public class MainActivity extends FragmentActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        
+
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
@@ -128,10 +129,12 @@ public class MainActivity extends FragmentActivity {
 
         if (session != null && session.isOpened()) {
             // if the session is already open,
-            // try to show the selection fragment
-            showFragment(SELECTION, false);
+            // try to show the fragment_profile fragment
+            Toast.makeText(this, "Welcome, Name!", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, ForSaleActivity.class);
+            startActivity(intent);
         } else {
-            // otherwise present the splash screen
+            // otherwise present the fragment_facebook screen
             // and ask the person to login.
             showFragment(SPLASH, false);
         }

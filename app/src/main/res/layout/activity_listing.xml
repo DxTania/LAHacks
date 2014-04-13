@@ -1,0 +1,95 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Title - $$$"
+            android:id="@+id/itemTitle"
+            android:layout_gravity="center_horizontal"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:typeface="serif"/>
+
+        <Space
+            android:layout_width="fill_parent"
+            android:layout_height="20dp"/>
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:maxHeight="300sp"
+            android:minHeight="100sp"
+            android:id="@+id/itemImage"/>
+
+        <Space
+            android:layout_width="fill_parent"
+            android:layout_height="20dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="This is a description"
+            android:id="@+id/itemDescription"/>
+
+        <Space
+            android:layout_width="fill_parent"
+            android:layout_height="20dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Location"
+            android:id="@+id/textView2"
+            android:textStyle="italic"/>
+
+        <Space
+            android:layout_width="fill_parent"
+            android:layout_height="20dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Preferred Method of Retrieval"
+            android:id="@+id/textView"
+            android:textStyle="italic"/>
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/preferredMethod"/>
+        
+        <Space
+            android:layout_width="fill_parent"
+            android:layout_height="20dp"/>
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Buy/Bid"
+            android:id="@+id/list"
+            android:textStyle="bold"
+            android:background="#76b0ce"/>
+
+        <Space
+            android:layout_width="fill_parent"
+            android:layout_height="20dp"/>
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="View Seller Profile"
+            android:id="@+id/button"
+            android:textStyle="bold"
+            android:background="#76b0ce"/>
+
+    </LinearLayout>
+</ScrollView>

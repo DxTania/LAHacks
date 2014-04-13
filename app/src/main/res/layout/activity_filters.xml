@@ -1,0 +1,128 @@
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="20dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Filters"
+        android:id="@+id/textView"
+        android:layout_gravity="center_horizontal"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:typeface="serif"/>
+
+    <Space
+        android:layout_width="fill_parent"
+        android:layout_height="20dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Distance: 0 miles"
+        android:id="@+id/distance"
+        android:textStyle="italic"/>
+
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/distanceBar"/>
+
+    <Space
+        android:layout_width="fill_parent"
+        android:layout_height="20dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Methods of Retrieval"
+        android:id="@+id/textView3"
+        android:textStyle="italic"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:padding="5dp">
+        <CheckBox
+            android:layout_width="0dp"
+            android:layout_weight="0.33"
+            android:layout_height="wrap_content"
+            android:text="Delivery"
+            android:id="@+id/checkBox"
+            android:checked="false"/>
+
+        <CheckBox
+            android:layout_width="0dp"
+            android:layout_weight="0.33"
+            android:layout_height="wrap_content"
+            android:text="Pickup"
+            android:id="@+id/checkBox2"
+            android:checked="false"/>
+
+        <CheckBox
+            android:layout_width="0dp"
+            android:layout_weight="0.33"
+            android:layout_height="wrap_content"
+            android:text="Meetup"
+            android:id="@+id/checkBox3"
+            android:checked="false"/>
+    </LinearLayout>
+
+    <Space
+        android:layout_width="fill_parent"
+        android:layout_height="20dp"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Price Range"
+        android:id="@+id/textView4"
+        android:textStyle="italic"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:hint="Minimum"
+        android:ems="10"
+        android:id="@+id/editText"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:hint="Maximum"
+        android:id="@+id/editText2"/>
+
+    <Space
+        android:layout_width="fill_parent"
+        android:layout_height="20dp"
+        android:id="@+id/space"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/subcategory">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sub-Category"
+            android:id="@+id/textView2"
+            android:textStyle="italic"/>
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/subcategorySpinner"/>
+    </LinearLayout>
+
+</LinearLayout>
