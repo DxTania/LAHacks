@@ -27,9 +27,9 @@ exports.bind = function( app ) {
 
 	// Create Post
 	app.post('/api/post/create', function( request, response ) {
-    if ( validatePostParams( request, response ) ) return;
     console.log(request);
     console.log(request.body);
+    if ( validatePostParams( request, response ) ) return;
     var newPost = new Post({
       title:        request.body.title,
       description:  request.body.description,
