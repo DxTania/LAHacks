@@ -32,7 +32,7 @@ var PostSchema = new Schema({
   bids:              [{ type: Schema.ObjectId, ref : 'transaction' }],
   status:             { type: String, enum: validStatuses, default : 'open' },
   sale:               { type: Schema.ObjectId, ref : 'transaction', default : null },
-  images:            [{ uri:  String, files: []}],
+  images:            [{ type: String }],                  // TODO: put this back to including a files reference for s3
   createdAt:          { type: Date, default: Date.now },
   moddedAt:           { type: Date, default: null },
   soldAt:             { type: Date, default: null },

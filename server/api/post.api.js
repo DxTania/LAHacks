@@ -11,7 +11,7 @@ function validatePostParams( request ) {
     request.checkBody('user', 'user is required.').notEmpty();
     request.checkBody('userName', 'userName is required.').notEmpty();
     request.checkBody('categories', 'categories is required.').notEmpty();
-    request.checkBody('images', 'images is required.').notEmpty();
+    // request.checkBody('images', 'images is required.').notEmpty();
     var errors = request.validationErrors();
     if ( errors ) {
       console.log( errors );
@@ -44,12 +44,14 @@ exports.bind = function( app ) {
     newPost.save( function( error, post ) {
         if ( error ) {
           console.log( error );
-          JsonResponse( error, response, 500 );
+          api.JsonResponse( error, response, 500 );
           return;
         }
-        JsonResponse( post, response, 200 );
+        api.JsonResponse( post, response, 200 );
     });
 	});
+
+// curl --data "title=PostedPost&description=SooooMeta&obo=true&price=50&meetTypes=['public']&user=534a66b105957a57474cfc1f&userName=Tylor Louis&categories=['junk']&images=[{uri:'test',files:[]}]"
 
 	// Edit Post
 	app.post('/api/post/edit', function( request, response ) {
