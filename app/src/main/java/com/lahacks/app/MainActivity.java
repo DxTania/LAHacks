@@ -14,6 +14,8 @@ import android.widget.TextView;
 import android.content.Intent;
 
 import android.widget.Toast;
+
+import com.etsy.android.grid.StaggeredGridView;
 import com.facebook.*;
 import com.facebook.model.*;
 import com.facebook.LoggingBehavior;
@@ -21,9 +23,27 @@ import com.facebook.Request;
 import com.facebook.Response;
 import com.facebook.Settings;
 import com.facebook.model.GraphUser;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.lahacks.app.adapters.FeedAdapter;
+import com.lahacks.app.classes.Item;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends FragmentActivity implements HttpCallback {
 
     private static final int SPLASH = 0;
     private static final int SELECTION = 1;
@@ -40,6 +60,11 @@ public class MainActivity extends FragmentActivity {
             };
 
     private Fragment[] fragments = new Fragment[FRAGMENT_COUNT];
+
+    public void httpCallback(String json) {
+         System.out.println("Here's the response");
+         System.out.println(json);
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -161,9 +186,12 @@ public class MainActivity extends FragmentActivity {
         transaction.commit();
     }
 
+
     private void onSessionStateChange(Session session, SessionState state, Exception exception) {
         // Only make changes if the activity is visible
+
         if (isResumed) {
+
             FragmentManager manager = getSupportFragmentManager();
             // Get the number of entries in the back stack
             int backStackSize = manager.getBackStackEntryCount();
@@ -174,7 +202,9 @@ public class MainActivity extends FragmentActivity {
             if (state.isOpened()) {
                 // If the session state is open:
                 // Show the authenticated fragment
+
                 showFragment(SELECTION, false);
+
             } else if (state.isClosed()) {
                 // If the session state is closed:
                 // Show the login fragment

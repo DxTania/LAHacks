@@ -16,13 +16,33 @@ import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
 import com.facebook.model.GraphUser;
 import com.facebook.widget.ProfilePictureView;
+import com.lahacks.app.HttpCallback;
+import com.lahacks.app.HttpReceiver;
+import com.lahacks.app.MainActivity;
 import com.lahacks.app.R;
 import com.lahacks.app.adapters.FeedAdapter;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.NameValuePair;
+import org.apache.http.StatusLine;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by seanzarrin on 4/12/14.
  */
-public class ProfileFragment extends android.support.v4.app.Fragment {
+public class ProfileFragment extends android.support.v4.app.Fragment implements HttpCallback {
     private ProfilePictureView profilePictureView;
     private TextView userNameView;
     private UiLifecycleHelper uiHelper;
@@ -61,6 +81,11 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
         }
 
         return view;
+    }
+
+    public void httpCallback(String json) {
+        System.out.println("Here's the response");
+        System.out.println(json);
     }
 
     @Override
@@ -117,6 +142,32 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
                                 profilePictureView.setProfileId(user.getId());
                                 // Set the Textview's text to the user's name.
                                 userNameView.setText(user.getName());
+
+                                // Display the parsed user info
+                                HttpPost post = new HttpPost("http://ec2-54-84-189-134.compute-1.amazonaws.com/api/user/signup");
+
+                                try {
+
+                                    String userId = user.getId();
+                                    String avatar = "http://graph.facebook.com/"+userId+"/picture";
+                                    // Add your data
+                                    List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+                                    nameValuePairs.add(new BasicNameValuePair("firstName", user.getFirstName()));
+                                    nameValuePairs.add(new BasicNameValuePair("lastName", user.getLastName()));
+                                    nameValuePairs.add(new BasicNameValuePair("email", user.getProperty("email").toString()));
+                                    nameValuePairs.add(new BasicNameValuePair("fbAuth", session.getAccessToken()));
+                                    nameValuePairs.add(new BasicNameValuePair("fbUserId", user.getId()));
+                                    nameValuePairs.add(new BasicNameValuePair("avatar", avatar));
+                                    post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+                                    // Execute HTTP Post Request
+                                    new HttpReceiver(ProfileFragment.this, post).execute();
+
+                                } catch (IOException e) {
+                                    // TODO Auto-generated catch block
+                                }
+
+
                             }
                         }
                         if (response.getError() != null) {
