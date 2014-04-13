@@ -4,13 +4,66 @@ var mongoose = require('mongoose'),
     Post = mongoose.model('Post');
 
 //*******************************************
+//* Validation data
+//*******************************************
+function validateSignupParams = function( request ) {
+		request.checkBody('firstName', 'firstName is required.').notEmpty();
+		request.checkBody('firstName', 'firstName must be alpha only.').isAlpha();
+		request.checkBody('lastName', 'lastName is required.').notEmpty();
+		request.checkBody('email', 'email is required.').notEmpty();
+		request.checkBody('email', 'email must be a valid address.').isEmail();
+		request.checkBody('fbAuth', 'fbAuth is required.').notEmpty();
+		request.checkBody('avatar', 'avatar is required.').notEmpty();
+		var errors = request.validationErrors();
+		if ( errors ) {
+			console.log( errors );
+			api.JsonResponse( errors, response, 400 );
+		}
+}
+
+
+//*******************************************
 //* API CALLS
 //*******************************************
 exports.bind = function( app ) {
-
 	// Register
 	app.post('/api/user/signup', function( request, response ) {
-		req.assert('firstName', 'First name is required.').notEmpty();
+	  validateSignupParams( request );
+
+	  var newUser = new User({
+		  firstName:           request.body.firstName,
+		  lastName:            request.body.lastName,
+		  email:               request.body.email,
+		  fbAuth:              request.body.fbAuth,
+		  fbUserId:            request.body.fbUserId,
+		  avatar:              request.body.avatar
+	  });
+
+    User.findOne({ email: newUser.email})
+    .or({fbAuth: newUser.fbAuth})
+    .or({fbUserId: newUser.fbUserId},
+      function( error, existingUser ) {
+        if ( error ) {
+          console.log( error );
+          JsonResponse( error, response, 500 );
+          return;
+        }
+        if ( existingUser ) {
+          console.log( 'User exists' );
+          JsonResponse( 'Previously registered user.', response, 400 );
+          return;
+        }
+        newUser.authToken = newUser.GetAuthToken();
+
+        newUser.save( function( error, user ) {
+          if ( error ) {
+            console.log( error );
+            JsonResponse( error, response, 500 );
+            return;
+          }
+          JsonResponse( {user: user}, response, 200 );
+        });
+      });
 	});
 
 	// Signin

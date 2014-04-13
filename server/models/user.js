@@ -52,6 +52,5 @@ UserSchema.methods = {
 
 };
 
-
 // Exported MODEL
 mongoose.model('User', UserSchema, 'users');
