@@ -44,6 +44,8 @@ public class ForSaleActivity extends FragmentActivity {
     private boolean searchButton = true;
     private int curPosition;
 
+    private Fragment curFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -121,8 +123,9 @@ public class ForSaleActivity extends FragmentActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode,
                                     Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 0) {
-            Toast.makeText(this, "Loading...", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Loading...", Toast.LENGTH_SHORT).show();
             // refresh grid with query results
         }
     }
@@ -138,22 +141,22 @@ public class ForSaleActivity extends FragmentActivity {
     private void selectItem(int position) {
 
         String navItem = navigationItems[position];
-        Fragment fragment = null;
+        curFragment = null;
 
         if (navItem.equals(getString(R.string.windowshop))) {
-            fragment = new BrowseFragment();
+            curFragment = new BrowseFragment();
             searchButton = true;
         } else if (navItem.equals(getString(R.string.list))) {
-            fragment = new SellFragment();
+            curFragment = new SellFragment();
             searchButton = false;
         } else if (navItem.equals(getString(R.string.categories))) {
-            fragment = new CategoriesFragment();
+            curFragment = new CategoriesFragment();
             searchButton = false;
         } else if (navItem.equals(getString(R.string.profile))) {
-            fragment = new ProfileFragment();
+            curFragment = new ProfileFragment();
             searchButton = false;
         } else if (navItem.equals(getString(R.string.add_card))){
-            fragment = new CardFragment();
+            curFragment = new CardFragment();
             searchButton = false;
         } else {
             callFacebookLogout();
@@ -161,9 +164,9 @@ public class ForSaleActivity extends FragmentActivity {
 
         invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
 
-        if (fragment != null) {
+        if (curFragment != null) {
             FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+            fragmentManager.beginTransaction().replace(R.id.content_frame, curFragment).commit();
         }
 
         // update selected item and title, then close the drawer

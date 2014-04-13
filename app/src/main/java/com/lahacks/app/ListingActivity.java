@@ -9,10 +9,8 @@ import android.view.View;
 import android.widget.*;
 import com.google.gson.Gson;
 import com.lahacks.app.classes.Item;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -72,11 +70,13 @@ public class ListingActivity extends Activity {
             }
         });
 
+        // View seller profile
         Button viewSellerProfile = (Button) findViewById(R.id.viewSellerProfile);
         viewSellerProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(this, )
+                Intent intent = new Intent(ListingActivity.this, SellerActivity.class);
+                startActivity(intent);
             }
         });
 

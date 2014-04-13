@@ -10,22 +10,28 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.*;
 import android.widget.*;
+import com.google.gson.Gson;
 import com.lahacks.app.R;
 import com.lahacks.app.adapters.CategoriesAdapter;
 import com.lahacks.app.classes.Item;
+import com.lahacks.app.http.HttpCallback;
+import com.lahacks.app.http.HttpReceiver;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.message.BasicNameValuePair;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class SellFragment extends android.support.v4.app.Fragment {
+public class SellFragment extends android.support.v4.app.Fragment implements HttpCallback {
     private static final int SELECT_PHOTO = 200;
     private static final int TAKE_PHOTO = 300;
 
@@ -39,6 +45,12 @@ public class SellFragment extends android.support.v4.app.Fragment {
 
     public SellFragment() {}
 
+    public void httpCallback(String json) {
+        // TODO: Verify posting was a success, go to a ListingActivity of the new item
+        Log.d("DEBUG", json);
+        Toast.makeText(getActivity(), "Listing success!", Toast.LENGTH_SHORT).show();
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -49,7 +61,7 @@ public class SellFragment extends android.support.v4.app.Fragment {
         categorySpinner = (Spinner) rootView.findViewById(R.id.category);
         photoPicker = (ImageButton) rootView.findViewById(R.id.gallery);
         listFinish = (Button) rootView.findViewById(R.id.list);
-        photoView = (ImageView) rootView.findViewById(R.id.photoView);
+        photoView = (ImageView) rootView.findViewById(R.id.listingImage);
 
         List<String> list = new ArrayList<String>();
         list.add("list 1");
@@ -79,6 +91,7 @@ public class SellFragment extends android.support.v4.app.Fragment {
                     photoFile = createImageFile();
                 } catch (IOException ex) {
                     // Error occurred while creating the File
+                    Toast.makeText(getActivity(), "Couldn't save file", Toast.LENGTH_SHORT).show();
                 }
                 // Continue only if the File was successfully created
                 if (photoFile != null) {
@@ -95,15 +108,17 @@ public class SellFragment extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View v) {
                 // TODO: Create item from fields, send to database
-                String title = ((EditText) rootView.findViewById(R.id.itemTitle)).getText().toString();
+                String title = ((EditText) rootView.findViewById(R.id.listingTitle)).getText().toString();
                 String description = ((EditText) rootView.findViewById(R.id.description)).getText().toString();
                 String category = categorySpinner.getSelectedItem().toString();
+                List<String> categories = new ArrayList<String>();
+                categories.add(category);
 
                 List<String> methods = new ArrayList<String>();
 
                 boolean delivery = ((CheckBox) rootView.findViewById(R.id.delivery)).isChecked();
                 boolean pickup = ((CheckBox) rootView.findViewById(R.id.pickup)).isChecked();
-                boolean publicMeetup = ((CheckBox) rootView.findViewById(R.id.meetup)).isChecked();
+                boolean publicMeetup = ((CheckBox) rootView.findViewById(R.id.publicMeetup)).isChecked();
 
                 if (delivery) {
                     methods.add("delivery");
@@ -136,8 +151,18 @@ public class SellFragment extends android.support.v4.app.Fragment {
                     photo = galImage;
                 }
 
-                Item item = new Item(title, description, category, "id", methods, price, obo);
-                Toast.makeText(getActivity(), "Listing success!", Toast.LENGTH_SHORT).show();
+                Item item = new Item(title, description, categories, "id", methods, price, obo, "http://example.com",
+                        "NAME");
+                HttpPost post = new HttpPost("http://ec2-54-84-189-134.compute-1.amazonaws.com/api/post/create");
+                try {
+                    StringEntity json = new StringEntity((new Gson()).toJson(item));
+                    json.setContentType("application/json");
+                    post.setEntity(json);
+                    Log.d("DEBUG", (new Gson()).toJson(item).toString());
+                    new HttpReceiver(SellFragment.this, post).execute();
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -147,7 +172,6 @@ public class SellFragment extends android.support.v4.app.Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent) {
         super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
-
         switch(requestCode) {
             case SELECT_PHOTO:
                 if(resultCode == Activity.RESULT_OK){
@@ -185,6 +209,7 @@ public class SellFragment extends android.support.v4.app.Fragment {
                     }
                 }
         }
+
     }
 
     private File createImageFile() throws IOException {

@@ -5,37 +5,66 @@ import android.graphics.Bitmap;
 import java.util.List;
 
 /**
- * Created by rawrtan on 4/12/14.
+ * Class that represents an item for sale
  */
 public class Item {
 
     private String title;
     private String description;
-    private String category;
+    private List<String> categories;
     private String user;
+    private String userName;
+    private String imageUrl;
 
     private List<String> meetTypes;
     private double price;
     private boolean obo;
-//    private Bitmap image;
 
-    public Item(String title, String description, String category, String user, List<String> meetTypes, double price,
-                boolean obo) {
+
+    public Item(String title, String description, List<String> categories, String user, List<String> meetTypes,
+                double price,
+                boolean obo, String url, String userName) {
         this.title = title;
         this.description = description;
-        this.category = category;
+        this.categories = categories;
         this.user = user;
         this.meetTypes = meetTypes;
         this.price = price;
         this.obo = obo;
+        this.imageUrl = url;
+        this.userName = userName;
     }
 
-    public String getCategory() {
-        return category;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public List<String> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<String> categories) {
+        this.categories = categories;
     }
 
     public void setTitle(String title) {

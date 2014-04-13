@@ -1,14 +1,12 @@
 package com.lahacks.app.fragments;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.view.*;
-import android.widget.ListAdapter;
 import com.etsy.android.grid.StaggeredGridView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.lahacks.app.HttpCallback;
-import com.lahacks.app.HttpReceiver;
+import com.lahacks.app.http.HttpCallback;
+import com.lahacks.app.http.HttpReceiver;
 import com.lahacks.app.R;
 import com.lahacks.app.adapters.FeedAdapter;
 import com.lahacks.app.classes.Item;
@@ -32,7 +30,9 @@ public class BrowseFragment extends android.support.v4.app.Fragment implements H
         Type listType = new TypeToken<List<Item>>() {}.getType();
         List<Item> items = gson.fromJson(json, listType);
         FeedAdapter adapter = new FeedAdapter(getActivity());
-        adapter.setContents(items);
+        if (items != null && items.size() > 0) {
+            adapter.setContents(items);
+        }
         StaggeredGridView gridView = (StaggeredGridView) rootView.findViewById(R.id.grid_view);
         gridView.setAdapter(adapter);
     }

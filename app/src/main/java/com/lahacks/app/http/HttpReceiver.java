@@ -1,14 +1,12 @@
-package com.lahacks.app;
+package com.lahacks.app.http;
 
 /**
- * Created by rawrtan on 4/13/14.
+ * HttpReceiver creates an asynchronous task in order to
+ * complete an HTTP GET or POST request with a callback
+ * which is passed the string result of the HTTP request
  */
-import android.app.Activity;
+
 import android.os.AsyncTask;
-import android.support.v4.app.Fragment;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.lahacks.app.classes.Item;
 import com.lahacks.app.classes.User;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -19,8 +17,6 @@ import org.apache.http.client.HttpClient;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.lang.reflect.Type;
-import java.util.List;
 
 public class HttpReceiver extends AsyncTask<Void, Void, String> {
     HttpPost post;
@@ -61,7 +57,9 @@ public class HttpReceiver extends AsyncTask<Void, Void, String> {
 
     @Override
     public void onPostExecute(String result) {
-        callback.httpCallback(result);
+        if (callback != null) {
+            callback.httpCallback(result);
+        }
     }
 
     public User getUser(String id) {
