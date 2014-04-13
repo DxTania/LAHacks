@@ -1,4 +1,5 @@
-var models = require(MODEL_CORE);
+var mongoose = require('mongoose'),
+    Post = mongoose.model('Post');
 
 
 
@@ -51,7 +52,5 @@ exports.bind = function( app ) {
   app.post('/api/post/like', function( request, response ) {
 
   });
-
-
 
 };

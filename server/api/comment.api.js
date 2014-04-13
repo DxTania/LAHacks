@@ -1,4 +1,5 @@
-var models = require(MODEL_CORE);
+var mongoose = require('mongoose'),
+    Comment = mongoose.model('Comment');
 
 
 
