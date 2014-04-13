@@ -6,7 +6,7 @@ var mongoose = require('mongoose'),
 //*******************************************
 //* Validation data
 //*******************************************
-function validateSignupParams = function( request ) {
+function validateSignupParams( request ) {
 		request.checkBody('firstName', 'firstName is required.').notEmpty();
 		request.checkBody('firstName', 'firstName must be alpha only.').isAlpha();
 		request.checkBody('lastName', 'lastName is required.').notEmpty();
