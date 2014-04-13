@@ -9,12 +9,10 @@ var express = require ('express'),
 //********************************************
 require( './globals.js' );
 require( API_CORE );
-var models = require( MODEL_CORE );
 
 //*******************************************
 //* DATABASE INIT
 //*******************************************
-var Mongoose = require('mongoose');
 var connect = function() {
     var options = { server: { socketOptions: { keepAlive: 1 }}};
     mongoose.connect( CONFIG.db, options );
@@ -29,6 +27,11 @@ mongoose.connection.on( 'disconnected', function(err) {
     connect();
 });
 
+// Bootstrap models
+var models_path = __dirname + '/models'
+fs.readdirSync(models_path).forEach(function (file) {
+  if (~file.indexOf('.js')) require(models_path + '/' + file)
+});
 
 //*******************************************
 //* SPECIAL EVENT LISTENERS
@@ -62,12 +65,6 @@ _.filter( apiDir, function( libFile ) {
     }
 });
 
-// _.filter( modelDir, function( libFile ) {
-//     if ( !fs.statSync( __dirname + '/models/' + libFile ).isDirectory() && libFile.indexOf( '.js' ) !== -1 && libFile != 'models.js' ) {
-//         console.log( 'Binding Model Class: ' + libFile );
-//         require( __dirname + '/models/' + libFile );
-//     }
-// });
 
 app.listen( CONFIG.port, function( error ) {
 	if ( error ) {
