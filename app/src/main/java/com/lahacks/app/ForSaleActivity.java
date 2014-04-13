@@ -36,7 +36,7 @@ public class ForSaleActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_forsale);
 
         navigationItems = getResources().getStringArray(R.array.navigation_items);
         sidebar = (DrawerLayout) findViewById(R.id.drawer_layout);
