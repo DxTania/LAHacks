@@ -61,7 +61,7 @@ exports.bind = function( app ) {
             JsonResponse( error, response, 500 );
             return;
           }
-          JsonResponse( {user: user}, response, 200 );
+          JsonResponse( user, response, 200 );
         });
       });
 	});
@@ -86,7 +86,7 @@ exports.bind = function( app ) {
 					return;
 				}
 
-				api.JsonResponse( {posts: posts}, response, 200 );
+				api.JsonResponse( posts, response, 200 );
 			});
 	});
 
@@ -113,7 +113,7 @@ exports.bind = function( app ) {
 
 				retUser = api.PureCloneObj( user );
 				retUser.posts = api.PureCloneObj( posts );
-				api.JsonResponse( {user: retUser}, response, 200 );
+				api.JsonResponse( retUser, response, 200 );
 			});
 		});
   });
