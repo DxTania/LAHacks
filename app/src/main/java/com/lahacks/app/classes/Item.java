@@ -2,32 +2,32 @@ package com.lahacks.app.classes;
 
 import android.graphics.Bitmap;
 
+import java.util.List;
+
 /**
  * Created by rawrtan on 4/12/14.
  */
 public class Item {
-    public final static int DELIVERY = 0;
-    public final static int PICKUP = 1;
-    public final static int MEETUP = 2;
 
     private String title;
     private String description;
     private String category;
+    private String user;
 
-    private boolean[] methods;
+    private List<String> meetTypes;
     private double price;
     private boolean obo;
-    private Bitmap image;
+//    private Bitmap image;
 
-    public Item(String title, String description, String category, boolean[] methods, double price, boolean obo,
-                Bitmap image) {
+    public Item(String title, String description, String category, String user, List<String> meetTypes, double price,
+                boolean obo) {
         this.title = title;
         this.description = description;
         this.category = category;
-        this.methods = methods;
+        this.user = user;
+        this.meetTypes = meetTypes;
         this.price = price;
         this.obo = obo;
-        this.image = image;
     }
 
     public String getCategory() {
@@ -46,8 +46,8 @@ public class Item {
         this.description = description;
     }
 
-    public void setMethods(boolean[] methods) {
-        this.methods = methods;
+    public void setMeetTypes(List<String> meetTypes) {
+        this.meetTypes = meetTypes;
     }
 
     public void setPrice(double price) {
@@ -56,10 +56,6 @@ public class Item {
 
     public void setObo(boolean obo) {
         this.obo = obo;
-    }
-
-    public void setImage(Bitmap image) {
-        this.image = image;
     }
 
     public String getTitle() {
@@ -71,8 +67,8 @@ public class Item {
         return description;
     }
 
-    public boolean[] getMethods() {
-        return methods;
+    public List<String> getMeetTypes() {
+        return meetTypes;
     }
 
     public double getPrice() {
@@ -81,9 +77,5 @@ public class Item {
 
     public boolean isObo() {
         return obo;
-    }
-
-    public Bitmap getImage() {
-        return image;
     }
 }

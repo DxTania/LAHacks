@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="junit-4.10">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/app/build/exploded-aar/LAHacks.libs/stripe/unspecified/libs/junit-4.10.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/stripe/libs/junit-4.10.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

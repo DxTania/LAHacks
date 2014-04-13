@@ -129,8 +129,7 @@ public class MainActivity extends FragmentActivity {
 
         if (session != null && session.isOpened()) {
             // if the session is already open,
-            // try to show the fragment_profile fragment
-            Toast.makeText(this, "Welcome, Name!", Toast.LENGTH_SHORT).show();
+            // start our app
             Intent intent = new Intent(this, ForSaleActivity.class);
             startActivity(intent);
         } else {

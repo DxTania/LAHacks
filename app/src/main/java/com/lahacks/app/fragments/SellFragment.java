@@ -99,10 +99,21 @@ public class SellFragment extends android.support.v4.app.Fragment {
                 String description = ((EditText) rootView.findViewById(R.id.description)).getText().toString();
                 String category = categorySpinner.getSelectedItem().toString();
 
-                boolean[] transType = new boolean[3];
-                transType[Item.DELIVERY] = ((CheckBox) rootView.findViewById(R.id.delivery)).isChecked();
-                transType[Item.PICKUP] = ((CheckBox) rootView.findViewById(R.id.pickup)).isChecked();
-                transType[Item.MEETUP] = ((CheckBox) rootView.findViewById(R.id.meetup)).isChecked();
+                List<String> methods = new ArrayList<String>();
+
+                boolean delivery = ((CheckBox) rootView.findViewById(R.id.delivery)).isChecked();
+                boolean pickup = ((CheckBox) rootView.findViewById(R.id.pickup)).isChecked();
+                boolean publicMeetup = ((CheckBox) rootView.findViewById(R.id.meetup)).isChecked();
+
+                if (delivery) {
+                    methods.add("delivery");
+                }
+                if (pickup) {
+                    methods.add("pickup");
+                }
+                if (publicMeetup) {
+                    methods.add("public");
+                }
 
                 double price;
                 try {
@@ -112,8 +123,7 @@ public class SellFragment extends android.support.v4.app.Fragment {
                 }
 
                 boolean obo = ((Switch) rootView.findViewById(R.id.obo)).isChecked();
-                boolean[] invalid = {false, false, false};
-                if (title.isEmpty() || transType == invalid || category.isEmpty() || price == 0 || (photoUri == null
+                if (title.isEmpty() || methods.size() == 0 || category.isEmpty() || price == 0 || (photoUri == null
                         && galImage == null)) {
                     Toast.makeText(getActivity(), "Please enter all fields before listing", Toast.LENGTH_SHORT).show();
                     return;
@@ -126,7 +136,7 @@ public class SellFragment extends android.support.v4.app.Fragment {
                     photo = galImage;
                 }
 
-                Item item = new Item(title, description, category, transType, price, obo, photo);
+                Item item = new Item(title, description, category, "id", methods, price, obo);
                 Toast.makeText(getActivity(), "Listing success!", Toast.LENGTH_SHORT).show();
             }
         });

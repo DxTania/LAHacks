@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListAdapter;
 import android.widget.TextView;
 
+import com.etsy.android.grid.StaggeredGridView;
 import com.facebook.Request;
 import com.facebook.Response;
 import com.facebook.Session;
@@ -15,6 +17,7 @@ import com.facebook.UiLifecycleHelper;
 import com.facebook.model.GraphUser;
 import com.facebook.widget.ProfilePictureView;
 import com.lahacks.app.R;
+import com.lahacks.app.adapters.FeedAdapter;
 
 /**
  * Created by seanzarrin on 4/12/14.
@@ -23,6 +26,7 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
     private ProfilePictureView profilePictureView;
     private TextView userNameView;
     private UiLifecycleHelper uiHelper;
+    private StaggeredGridView gridView;
     private static final int REAUTH_ACTIVITY_CODE = 100;
     private Session.StatusCallback callback = new Session.StatusCallback() {
         @Override
@@ -44,6 +48,10 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
 
         // Find the user's name view
         userNameView = (TextView) view.findViewById(R.id.selection_user_name);
+
+        ListAdapter adapter = new FeedAdapter(getActivity());
+        gridView = (StaggeredGridView) view.findViewById(R.id.grid_view);
+        gridView.setAdapter(adapter);
 
         // Check for an open session
         Session session = Session.getActiveSession();
