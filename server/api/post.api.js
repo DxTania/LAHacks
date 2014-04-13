@@ -30,15 +30,15 @@ exports.bind = function( app ) {
     console.log(request);
     console.log(request.body);
     var testData = {
-      title:        request.params('title'),
-      description:  request.params('description'),
-      obo:          request.params('obo'),
-      price:        request.params('price'),
-      meetTypes:    request.params('meetTypes'),
-      user:         request.params('user'),
-      userName:     request.params('userName'),
-      categories:   request.params('categories'),
-      images:       request.params('images')
+      title:        request.param('title'),
+      description:  request.param('description'),
+      obo:          request.param('obo'),
+      price:        request.param('price'),
+      meetTypes:    request.param('meetTypes'),
+      user:         request.param('user'),
+      userName:     request.param('userName'),
+      categories:   request.param('categories'),
+      images:       request.param('images')
     }
     console.log("test data");
     console.log(testData);
