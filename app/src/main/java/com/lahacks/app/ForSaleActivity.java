@@ -124,9 +124,10 @@ public class ForSaleActivity extends FragmentActivity {
     protected void onActivityResult(int requestCode, int resultCode,
                                     Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 0) {
+        if (requestCode == 0 && resultCode == RESULT_OK) {
+            // TODO: Use return intent data to send async request
             Toast.makeText(this, "Loading...", Toast.LENGTH_SHORT).show();
-            // refresh grid with query results
+            // TODO: Refresh grid with query results
         }
     }
 
@@ -231,7 +232,7 @@ public class ForSaleActivity extends FragmentActivity {
                 card,
                 new TokenCallback(){
                     public void onSuccess(Token token) {
-                        // Send token to Tylor's server
+                        // TODO: Send token to Tylor's server
                     }
                     public void onError(Exception error){
                         // Take care of error

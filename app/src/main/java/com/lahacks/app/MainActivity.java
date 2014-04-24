@@ -28,6 +28,7 @@ import com.google.gson.reflect.TypeToken;
 import com.lahacks.app.adapters.FeedAdapter;
 import com.lahacks.app.classes.Item;
 
+import com.lahacks.app.http.HttpCallback;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;

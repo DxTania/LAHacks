@@ -28,4 +28,5 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':libs:facebook')
     compile project(':libs:stripe')
+    compile files('/Users/rawrtan/Documents/ProjectsnPractice/Android/LAHacks/libs/urlimageviewhelper-1.0.4.jar')
 }

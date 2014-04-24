@@ -2,12 +2,14 @@ package com.lahacks.app;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
 import com.google.gson.Gson;
+import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 import com.lahacks.app.classes.Item;
 
 import java.util.ArrayList;
@@ -29,7 +31,8 @@ public class ListingActivity extends Activity {
 
         // Image
         ImageView imageView = (ImageView) findViewById(R.id.itemImage);
-        imageView.setImageResource(android.R.drawable.ic_menu_help);
+        imageView.setImageResource(android.R.drawable.progress_indeterminate_horizontal);
+        UrlImageViewHelper.setUrlDrawable(imageView, item.getImageUrl());
 
         // Title
         TextView description = (TextView) findViewById(R.id.itemDescription);
@@ -40,19 +43,8 @@ public class ListingActivity extends Activity {
 
         // Preferred method spinner
         Spinner methodSpinner = (Spinner) findViewById(R.id.preferredMethod);
-        List<String> meetTypes = item.getMeetTypes();
-        List<String> list = new ArrayList<String>();
-        if (meetTypes.contains("delivery")) {
-            list.add("Delivery");
-        }
-        if (meetTypes.contains("public")) {
-            list.add("Public");
-        }
-        if (meetTypes.contains("pickup")) {
-            list.add("Pickup");
-        }
         ArrayAdapter<String> transAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, list);
+                android.R.layout.simple_spinner_item, item.getMeetTypes());
         transAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         methodSpinner.setAdapter(transAdapter);
 

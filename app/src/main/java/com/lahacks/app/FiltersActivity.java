@@ -1,10 +1,12 @@
 package com.lahacks.app;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -51,8 +53,18 @@ public class FiltersActivity extends Activity {
 
             }
         });
-    }
 
+        Button setFilters = (Button) findViewById(R.id.setFilters);
+        setFilters.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO: Actually put a request to send out in return intent
+                Intent returnIntent = new Intent();
+                FiltersActivity.this.setResult(RESULT_OK, returnIntent);
+                finish();
+            }
+        });
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -70,6 +82,7 @@ public class FiltersActivity extends Activity {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
+                this.setResult(RESULT_CANCELED);
                 finish();
             case R.id.action_settings:
                 return true;

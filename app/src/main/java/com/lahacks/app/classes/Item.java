@@ -1,7 +1,14 @@
 package com.lahacks.app.classes;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -97,7 +104,11 @@ public class Item {
     }
 
     public List<String> getMeetTypes() {
-        return meetTypes;
+        List<String> ret = new ArrayList<String>();
+        for(String meetType : meetTypes) {
+            ret.add(meetType.substring(0, 1).toUpperCase() + meetType.substring(1));
+        }
+        return ret;
     }
 
     public double getPrice() {

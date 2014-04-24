@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.TextView;
+import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 import com.lahacks.app.R;
 import com.lahacks.app.classes.Item;
 import com.lahacks.app.ListingActivity;
@@ -27,21 +28,16 @@ import java.util.List;
 
 
 /**
- * Created by rawrtan on 4/12/14.
+ * Adapter for the user's feed, handles views for each item in the grid
  */
 public class FeedAdapter implements ListAdapter {
 
     private Context context;
-    private Bitmap example;
     private List<Item> contents;
 
     public FeedAdapter(Context c) {
         context = c;
         contents = new ArrayList<Item>();
-        Bitmap ex = BitmapFactory.decodeResource(context.getResources(), R.drawable.example);
-        double ratio = ex.getWidth()/ex.getHeight();
-        example = Bitmap.createScaledBitmap(ex, 200, (int) (200/ratio), false);
-        ex.recycle();
     }
 
     public void setContents(List<Item> items) {
@@ -101,11 +97,10 @@ public class FeedAdapter implements ListAdapter {
                 LinearLayout.LayoutParams.WRAP_CONTENT, 1.0f);
         itemLayout.setLayoutParams(params);
 
-        // Image
-        ImageView ex = new ImageView(context);
-        ex.setScaleType(ImageView.ScaleType.FIT_XY);
-        double ratio = example.getWidth() / example.getHeight();
-        ex.setImageBitmap(Bitmap.createScaledBitmap(example, 300, (int) (300/ratio), false));
+        // Download and set image
+        ImageView imageView = new ImageView(context);
+        imageView.setAdjustViewBounds(true);
+        UrlImageViewHelper.setUrlDrawable(imageView, item.getImageUrl());
 
         // Text Layout
         LinearLayout textLayout = new LinearLayout(context);
@@ -123,20 +118,20 @@ public class FeedAdapter implements ListAdapter {
         textTitle.setPadding(10, 10, 0, 10);
         textTitle.setBackgroundColor(Color.WHITE);
         textTitle.setLayoutParams(textParams);
+        textLayout.addView(textTitle);
 
         // Price
+        // TODO: Set price color based on their price filter setting. Red high, etc.
         TextView textPrice = new TextView(context);
         NumberFormat nf = NumberFormat.getCurrencyInstance();
         textPrice.setText(nf.format(item.getPrice()));
         textPrice.setPadding(0, 10, 10, 10);
         textPrice.setLayoutParams(textParams2);
         textPrice.setGravity(Gravity.RIGHT);
-
-        textLayout.addView(textTitle);
         textLayout.addView(textPrice);
 
-        // Finish
-        itemLayout.addView(ex);
+        // Finish adding views
+        itemLayout.addView(imageView);
         itemLayout.addView(textLayout);
 
         // Click
